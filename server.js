@@ -10,7 +10,8 @@ require("dotenv").config()
 const port=process.env.PORT || 2000;
 
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: ["http://localhost:5173",
+  "https://myraid-frontend.vercel.app"],
   credentials: true
 }));
 app.use(express.json());
