@@ -5,9 +5,15 @@ const {validateTask} =require("../middleware/validateTask")
 
 router.post("/register", register);
 router.post("/login", login);
-router.post("/logout", (req, res) => {
-  res.clearCookie("token");
-  res.json({ message: "Logout successful" });
+app.post("/logout", (req, res) => {
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+    path: "/"
+  });
+
+  res.status(200).json({ message: "Logged out successfully" });
 });
 router.get("/me", middleware, (req, res) => {
   res.json({
